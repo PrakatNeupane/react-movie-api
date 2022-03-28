@@ -3,14 +3,13 @@ import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
 import { CustomCard } from '../Card/CustomCard'
 import { fetchMovie } from '../helper/AxiosHelper';
 
-export const SearchForm = () => {
+export const SearchForm = ({ handleOnAddToList }) => {
 
     const [search, setSearch] = useState('');
     const [movie, setMovie] = useState({})
 
     const handleOnChange = (e) => {
         const { value } = e.target;
-        console.log(value);
         setSearch(value);
     }
 
@@ -41,13 +40,7 @@ export const SearchForm = () => {
                 </Row>
             </Form>
 
-            <Row>
-                <Col className='d-flex justify-content-center'>
-                    {movie.Response === 'True' && <CustomCard movie={movie} />}
 
-                    {movie.Response === 'False' && <Alert variant='danger'>{movie.Error}</Alert>}
-                </Col>
-            </Row>
         </>
     )
 }
