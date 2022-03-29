@@ -19,7 +19,7 @@ export const MovieList = ({ movieList }) => {
                     </ButtonGroup>
                 </div>
                 <div className='d-flex justify-content-between flex-wrap'>
-                    {movieList.map((movie, i) => <CustomCard movie={movie} />)}
+                    {movieList.map((movie, i) => <CustomCard movie={movie} btnDelete='true' />)}
 
                 </div>
             </Col>

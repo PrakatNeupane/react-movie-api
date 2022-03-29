@@ -3,10 +3,9 @@ import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
 import { CustomCard } from '../Card/CustomCard'
 import { fetchMovie } from '../helper/AxiosHelper';
 
-export const SearchForm = ({ handleOnAddToList }) => {
+export const SearchForm = ({ handleOnAddToList, getMovie }) => {
 
     const [search, setSearch] = useState('');
-    const [movie, setMovie] = useState({})
 
     const handleOnChange = (e) => {
         const { value } = e.target;
@@ -15,8 +14,7 @@ export const SearchForm = ({ handleOnAddToList }) => {
 
     const handleOnSubmit = async e => {
         e.preventDefault();
-        const movie = await fetchMovie(search);
-        setMovie(movie.data)
+        getMovie(search)
     }
     return (
         <>

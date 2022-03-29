@@ -1,13 +1,22 @@
 import { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import './App.css';
+import { CustomCard } from './components/Card/CustomCard';
 import { SearchForm } from './components/form/SearchForm';
+import { fetchMovie } from './components/helper/AxiosHelper';
 import { MovieList } from './components/movie-list/MovieList';
 import { Title } from './components/Title/Title';
 
 
 const App = () => {
   const [movieList, setMovieList] = useState([]);
+  const [movie, setMovie] = useState({})
+
+
+  const getMovie = async search => {
+    const movie = await fetchMovie(search);
+    setMovie(movie.data)
+  }
 
   const handleOnAddToList = (cat, movie) => { // category = cat
     const obj = {
@@ -23,6 +32,7 @@ const App = () => {
 
     if (!isExist) {
       setMovieList([...movieList, obj])
+      setMovie({})
     } else {
       alert("Movie already exists")
     }
@@ -45,9 +55,9 @@ const App = () => {
     <div className='wrapper'>
       <Container>
         <Title />
-        <SearchForm handleOnAddToList={handleOnAddToList} />
+        <SearchForm handleOnAddToList={handleOnAddToList} getMovie={getMovie} />
 
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center mt-3'>
           {movie.Response === 'True' && <CustomCard movie={movie} fun={handleOnAddToList} />}
 
           {movie.Response === 'False' && <Alert variant='danger'>{movie.Error}</Alert>}
