@@ -33,29 +33,27 @@ const App = () => {
 
     if (!isExist) {
       setMovieList([...movieList, obj])
+      setMovieMainList([...movieMainList, obj])
       setMovie({})
     } else {
       alert("Movie already exists")
     }
-
-
-    // // whenever we click the item, we dont want repetition
-    // movieList.map((item) => {
-    //   if (item.imdbID !== movie.imdbID) {
-    //     console.log('exe1...')
-    //     return setMovieList([...movieList, obj])
-    //   } else {
-    //     alert("Movie already exists")
-    //   }
-    // })
-
-
   }
 
   const handleOnDelete = imdbID => {
-    console.log(imdbID)
-    const filteredList = movieList.filter((item) => item.imdbID !== imdbID)
+    const filteredList = movieMainList.filter((item) => item.imdbID !== imdbID)
     setMovieList(filteredList)
+    setMovieMainList(filteredList)
+  }
+
+  const handleOnSelect = (cat) => {
+    let filterArgs = []
+    if (cat) {
+      filterArgs = movieMainList.filter(itm => itm.cat === cat)
+    } else {
+      filterArgs = movieMainList;
+    }
+    setMovieList(filterArgs);
   }
   return (
     <div className='wrapper'>
@@ -70,7 +68,7 @@ const App = () => {
         </div>
 
         <hr />
-        <MovieList movieList={movieList} handleOnDelete={handleOnDelete} />
+        <MovieList movieList={movieList} handleOnDelete={handleOnDelete} handleOnSelect={handleOnSelect} />
       </Container>
     </div>
   );
