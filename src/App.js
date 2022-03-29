@@ -9,6 +9,7 @@ import { Title } from './components/Title/Title';
 
 
 const App = () => {
+  const [movieMainList, setMovieMainList] = useState([]);
   const [movieList, setMovieList] = useState([]);
   const [movie, setMovie] = useState({})
 
@@ -50,7 +51,12 @@ const App = () => {
 
 
   }
-  console.log(movieList)
+
+  const handleOnDelete = imdbID => {
+    console.log(imdbID)
+    const filteredList = movieList.filter((item) => item.imdbID !== imdbID)
+    setMovieList(filteredList)
+  }
   return (
     <div className='wrapper'>
       <Container>
@@ -64,7 +70,7 @@ const App = () => {
         </div>
 
         <hr />
-        <MovieList movieList={movieList} />
+        <MovieList movieList={movieList} handleOnDelete={handleOnDelete} />
       </Container>
     </div>
   );

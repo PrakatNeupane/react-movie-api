@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, ButtonGroup, Col, Row } from 'react-bootstrap'
 import { CustomCard } from '../Card/CustomCard'
 
-export const MovieList = ({ movieList }) => {
+export const MovieList = ({ movieList, handleOnDelete }) => {
     return (
         <Row>
             <Col>
@@ -11,7 +11,7 @@ export const MovieList = ({ movieList }) => {
                     <ButtonGroup aria-label="Basic example" size='lg'>
                         <Button variant="warning">ALL</Button>
                         <Button variant="primary">HAPPY</Button>
-                        <Button variant="danger">SAD</Button>
+                        <Button variant="danger">LAZY</Button>
                     </ButtonGroup>
                     <ButtonGroup aria-label="Basic example" size='lg'>
                         <Button variant="primary">GRID</Button>
@@ -19,7 +19,7 @@ export const MovieList = ({ movieList }) => {
                     </ButtonGroup>
                 </div>
                 <div className='d-flex justify-content-between flex-wrap'>
-                    {movieList.map((movie, i) => <CustomCard movie={movie} btnDelete='true' />)}
+                    {movieList.map((movie, i) => <CustomCard movie={movie} key={i} btnDelete='true' fun={handleOnDelete} />)}
 
                 </div>
             </Col>

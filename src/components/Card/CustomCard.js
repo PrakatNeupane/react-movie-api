@@ -12,6 +12,7 @@ export const CustomCard = ({ movie, fun, btnDelete = false }) => {
                 {btnDelete ? (
                     <div className='d-grid gap-2'>
                         <Button variant='danger'
+                            onClick={() => { fun(movie.imdbID) }}
                             size='lg'
                         >Delete</Button>
                     </div>)
